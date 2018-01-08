@@ -1,0 +1,4 @@
+
+
+(defvar global-scope ())
+
