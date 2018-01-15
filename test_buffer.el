@@ -25,3 +25,8 @@
 
 (let ((x 1))
   (= 1 x))
+
+(let ((variable '((field) (method))))
+  (let ((var (car variable)))
+    (let ((function (nthcdr 1 variable))
+      function)))
