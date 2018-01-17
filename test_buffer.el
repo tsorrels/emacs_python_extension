@@ -1,5 +1,13 @@
 (require 'ert)
 
+(load "~/Documents/repos/emacs_python_extension/py-completion.el")
+
+(newline-parse-variable)
+
+(global-set-key (kbd "RET") 'newline-parse-variable)
+
+
+
 (ert-deftest addition-test1()
   (let
       ((y 3))
@@ -30,3 +38,23 @@
   (let ((var (car variable)))
     (let ((function (nthcdr 1 variable))
       function)))
+
+
+
+
+  (lookup-key (current-global-map) "\C-x\C-f")
+
+  (lookup-key (current-global-map) (kbd "C-x C-f"))
+  (lookup-key (current-global-map) (kbd "1"))
+  (lookup-key (current-global-map) (kbd "RET"))
+(insert-char A)
+
+(newline)
+
+
+A
+
+  (current-global-map)
+  (local-global-map)
+(last-command)
+  
