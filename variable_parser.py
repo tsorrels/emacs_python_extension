@@ -11,6 +11,10 @@ def get_stdin():
     return returned_text
 
 
+
+
+
+
 def main():
     input = get_stdin()
     pass

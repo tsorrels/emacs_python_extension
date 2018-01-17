@@ -2,11 +2,16 @@
 
 (load "~/Documents/repos/emacs_python_extension/py-completion.el")
 
+
 (newline-parse-variable)
 
 (global-set-key (kbd "RET") 'newline-parse-variable)
 
+(kbd "RET")
 
+
+
+E/
 
 (ert-deftest addition-test1()
   (let
