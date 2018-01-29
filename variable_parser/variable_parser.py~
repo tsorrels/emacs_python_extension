@@ -1,0 +1,55 @@
+from variable import Variable
+
+delimeters = [
+    '.',
+    '=',
+    '+',
+    '/',
+    '%',
+    '>',
+    '<',
+    '>',
+    '&'
+
+    ]
+
+
+
+def is_keyword(word):
+    return False
+
+
+class VariableParser(object):
+
+    def parse_line(self, line):
+        symbol = ''
+        index = 0
+        while index < len(line):        
+            if line[index] in delimeters:
+                break
+            else:
+                symbol += line[index]
+                index ++
+
+        variable = Variable(symbol)
+        return variable
+    
+
+    def parse_input(self, input):
+        variables = []
+        index = 0
+        line = ''
+        while index < len(input):
+            if input[index] != '\n':
+                line += input[index]
+            
+            else:
+                variable = parse_line(line)
+                if variable:
+                    variables.append(variable)
+                line = ''  #reset line variable
+    
+        index ++
+
+        return variables
+            

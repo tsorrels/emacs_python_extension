@@ -1,0 +1,22 @@
+
+def format_list(list):
+    string = ''
+    for item in list:
+        string += '{0},'.format(item)
+
+    string = string[0:len(string)-1] #remove last ','
+    return string
+
+class Variable(object):
+    def __init__(self, symbol, fields = [], methods = []):
+        self.symbol = symbol
+        self.fields = fields
+        self.methods = methods
+
+    def to_string(self):        
+        fields_string = format_list(self.fields)
+        methods_string = format_list(self.methods)        
+        string = '{0};{1};{2}'.format(self.symbol,
+                                      fields_string,
+                                      methods_string) 
+        return string
