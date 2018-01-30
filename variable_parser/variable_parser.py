@@ -1,3 +1,5 @@
+import keyword
+import string
 from variable import Variable
 
 delimeters = [
@@ -11,13 +13,9 @@ delimeters = [
     '>',
     '&',
     ' ',
+    '#',
     '\t'
     ]
-import string
-
-def is_keyword(word):
-    return False
-
 
 class VariableParser(object):
 
@@ -33,7 +31,6 @@ class VariableParser(object):
             else:
                 break
         
-
         symbol = ''
         while index < len(line):        
             if line[index] in delimeters:
@@ -43,10 +40,13 @@ class VariableParser(object):
             index+=1
 
         #symbol = symbol.strip() #remove white space
-        if symbol != '':
+        if symbol != '' and not keyword.iskeyword(symbol):
             variable = Variable(symbol)
-            return variable
 
+        #check for variable assignment
+        if '=' in line[index:]:
+            return variable
+        
         return None
     
 
@@ -67,4 +67,3 @@ class VariableParser(object):
         index+=1
 
         return variables
-            

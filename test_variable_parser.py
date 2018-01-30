@@ -26,10 +26,43 @@ class TestVariableParser(unittest.TestCase):
         variable = variable_parser.parse_line(line)        
         self.assertTrue(not variable)
 
+    def test_parse_line_invalid_line(self):
+        variable_parser = VariableParser()
+        line = "\t variable1.field + Max(3, 4) "
+        variable = variable_parser.parse_line(line)        
+        self.assertTrue(not variable)
+        
     def test_parse_line_void_function(self):
         variable_parser = VariableParser()
         line = "exit(1)"
         variable = variable_parser.parse_line(line)        
+        self.assertTrue(not variable)
+
+    def test_parse_line_function_defintion(self):
+        variable_parser = VariableParser()
+        line = "def parse_line(self, variable):"
+        variable = variable_parser.parse_line(line)        
+        self.assertTrue(not variable)
+
+    def test_parse_line_class_definition(self):
+        variable_parser = VariableParser()
+        line = "class VariableParser(object):"
+        variable = variable_parser.parse_line(line)        
+        #print variable.symbol
+        self.assertTrue(not variable)
+
+    def test_parse_line_comment(self):
+        variable_parser = VariableParser()
+        line = "#var = 4"
+        variable = variable_parser.parse_line(line)        
+        #print variable.symbol
+        self.assertTrue(not variable)
+
+    def test_parse_line_comment_mid_line(self):
+        variable_parser = VariableParser()
+        line = "var #="
+        variable = variable_parser.parse_line(line)        
+        #print variable.symbol
         self.assertTrue(not variable)
         
         
