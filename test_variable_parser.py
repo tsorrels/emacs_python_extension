@@ -65,4 +65,16 @@ class TestVariableParser(unittest.TestCase):
         #print variable.symbol
         self.assertTrue(not variable)
         
-        
+    def test_parse_file(self):
+        variable_parser = VariableParser()
+        fd = open("./test/test_input_script.py")
+        input = fd.read()
+        fd.close()
+        variables = variable_parser.parse_input(input)
+        variable_symbols = []
+        for variable in variables:
+            variable_symbols.append(variable.symbol)
+        self.assertTrue('Threads' in variable_symbols)
+        self.assertTrue('lock' in variable_symbols)
+        self.assertTrue('connection' in variable_symbols)
+        self.assertTrue(not 'run_time' in variable_symbols)

@@ -71,11 +71,11 @@ class VariableParser(object):
                 line += input[index]
             
             else:
-                variable = parse_line(line)
+                variable = self.parse_line(line)
                 if variable:
                     variables.append(variable)
                 line = ''  #reset line variable
     
-        index+=1
+            index+=1
 
         return variables
