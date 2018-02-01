@@ -82,3 +82,12 @@
 	(should (string-equal "field2" (nth 1 fields)))
 	(should (string-equal "method1" (nth 0 methods)))
 	(should (string-equal "method2" (nth 1 methods)))))))
+
+
+
+
+(ert-deftest test-run-parser ()
+  ""
+  (setq global-scope nil)
+  
+  )

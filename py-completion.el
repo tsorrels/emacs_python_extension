@@ -2,7 +2,7 @@
 
 (defvar global-scope ())
 
-(defvar parser-exe-name "python2 parse_variables.py")
+(defvar parser-exe-name "python2 /home/tsorrels/Documents/repos/emacs_python_extension/test_variable_output.txt/parse_variables.py")
 
 (defun create-variable (symbol fields methods)
   "Generate a list specially formated list to represent a variable.
