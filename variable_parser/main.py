@@ -1,3 +1,6 @@
+import sys
+from variable_parser import VariableParser
+
 
 
 def get_stdin():
@@ -11,13 +14,17 @@ def get_stdin():
     return returned_text
 
 
-
-
+ 
+def write_output(variables):
+    for variable in variables:
+        sys.stdout.write(variable.to_string() + '\n')
 
 
 def main():
+    variable_parser = VariableParser()
     input = get_stdin()
-    pass
+    variables = variable_parser.parse_input(input)
+    write_output(variables)
 
 
 if __name__ == '__main__':
