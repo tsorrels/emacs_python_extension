@@ -167,3 +167,8 @@ A
 (point-min)
 
 (point-max)
+
+
+(let ((list1 '("a" "b"))
+      (list2 '("b" "c" "d")))
+  (append list1 list2))

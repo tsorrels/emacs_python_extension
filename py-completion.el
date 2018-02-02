@@ -1,8 +1,7 @@
 
-
 (defvar global-scope ())
 
-(defvar parser-exe-name "python2 /home/tsorrels/Documents/repos/emacs_python_extension/test_variable_output.txt/parse_variables.py")
+(defvar parser-exe-name "/home/tsorrels/Documents/repos/emacs_python_extension/parse_variables.py")
 
 (defun create-variable (symbol fields methods)
   "Generate a list specially formated list to represent a variable.
@@ -16,6 +15,11 @@ The third element is a list of strings which are the variable's methods."
   (setq scope (cons var scope)))
 
 (defun get-variable (symbol scope)
+  "Retreives the variable that has a matching symbol from the scope.
+The variable returned is a specially formated list.
+The first element of the list is a string that represents the variable symbol.
+The second element is a list of strings which are the variable's fields.
+The third element is a list of strings which are the variable's methods."
   (let ((list-ptr scope) var var-symbol)
     (while list-ptr
       (setq var (car list-ptr))
@@ -41,8 +45,8 @@ The third element is a list of strings which are the variable's methods."
 (global-set-key (kbd "RET") 'newline-parse-variable)
 
 
-(defun add-variables-to-global-scope ()
-  )
+(defun add-variables-to-global-scope (variables)
+  (setq global-scope (append variables global-scope)))
 
 
 
@@ -110,9 +114,8 @@ The third element is a list of strings which are the variable's methods."
 
 
 (defun run-parser ()
-  (let ((output-buffer (generate-new-buffer "parser")))
+  (let ((buffer (generate-new-buffer "parser")))
     (save-excursion	
-      (call-process-region point-min point-max parser-exe-name nil output-buffer)
-      (let ((variables (parse-variables-buffer (output-buffer))))
-	(add-variables-to-global-scope (variables))))))
-      
+      (call-process-region (point-min) (point-max) parser-exe-name nil buffer)
+      (let ((variables (parse-variables-buffer buffer)))
+	(add-variables-to-global-scope variables )))))

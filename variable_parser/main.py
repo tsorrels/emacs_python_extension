@@ -1,3 +1,4 @@
+import sys
 from variable_parser import VariableParser
 
 
@@ -15,12 +16,14 @@ def get_stdin():
 
  
 def write_output(variables):
-    pass
+    for variable in variables:
+        sys.stdout.write(variable.to_string() + '\n')
 
 
 def main():
+    variable_parser = VariableParser()
     input = get_stdin()
-    variables = parse_input(input)
+    variables = variable_parser.parse_input(input)
     write_output(variables)
 
 

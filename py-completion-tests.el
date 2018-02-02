@@ -30,7 +30,6 @@
     (should (eq nil (nth 1 variable)))
     (should (eq nil (nth 2 variable)))))
 
-
 (ert-deftest test-parse-line-one-field ()
   "Test parse-line with one field and no methods."
   (let ((line "variable1;field1;") variable)
@@ -46,7 +45,6 @@
     (should (string-equal "variable1" (car variable)))
     (should (string-equal "field1" (car (nth 1 variable))))
     (should (string-equal "method1" (car (nth 2 variable))))))
-
 
 (ert-deftest test-parse-line-multiple-fields-and-methods ()
   "Test parse-line with two fields and three methods."
@@ -83,11 +81,17 @@
 	(should (string-equal "method1" (nth 0 methods)))
 	(should (string-equal "method2" (nth 1 methods)))))))
 
-
-
-
 (ert-deftest test-run-parser ()
   ""
   (setq global-scope nil)
-  
-  )
+  (let ((current-buffer (generate-new-buffer "test-text-buffer"))
+	(variables nil))
+    (set-buffer current-buffer)
+    (insert-file-contents "/home/tsorrels/Documents/repos/emacs_python_extension/test/test_input_script.py" nil nil nil)
+    (run-parser)
+    (let ((var1 (get-variable "Threads" global-scope))
+	  (var2 (get-variable "lock" global-scope))
+	  (var3 (get-variable "connections" global-scope)))
+      (should (string-equal "Threads" (car var1)))
+      (should (string-equal "lock" (car var2)))
+      (should (string-equal "connections" (car var3))))))
