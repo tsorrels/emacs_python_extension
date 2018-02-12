@@ -6,6 +6,7 @@
 
 (ert-deftest test-scope-exists ()
   "Tests whether the global scope list exists."
+  (setq global-scope nil)
   (should (eq nil global-scope)))
 
 (ert-deftest test-insert-variable-into-scope ()
@@ -289,6 +290,7 @@
 	(current-buffer (generate-new-buffer "test-text-buffer"))
 	final-text
 	returned-variable)
+    (setq global-scope nil)
     (setq variable1 (create-variable "variable1" fields1 methods1))
     (insert-into-global-scope variable1)
     (set-buffer current-buffer)

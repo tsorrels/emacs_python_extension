@@ -36,11 +36,11 @@ The third element is a list of strings which are the variable's methods."
       (setq var-symbol (car var))
       (if (string-equal symbol var-symbol)
 	  (progn
-	    (setq list-ptr nil)
-	    (message "found variable."))
+	    (setq list-ptr nil))
+	    ;(message "found variable."))
 	(progn
-	  (setq list-ptr (cdr list-ptr))
-	  (message "didn't find variable."))))      
+	  (setq list-ptr (cdr list-ptr)))))
+	  ;(message "didn't find variable."))))      
     var))
 
 
