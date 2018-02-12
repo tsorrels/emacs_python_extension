@@ -1,13 +1,6 @@
-
-;;; (require 'py-completion.el)
-
-;;; (kill-all-local-variables)
-
-;(with-current-buffer buffer
-
 (funcall 'python-mode)
 
-(load "~/Documents/repos/emacs_python_extension/py-completion.el")
+(load (concat default-directory "py-completion.el"))
 
 (require 'ert)
 
