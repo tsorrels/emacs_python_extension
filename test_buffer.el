@@ -9,9 +9,14 @@
 
 (kbd "RET")
 
+(kbd "<backtab>")
+(kbd "g")
+(kbd "<S-tab>")
+
+(global-set-key (kbd "<backtab>") 'newline)
 
 
-E/
+
 
 (ert-deftest addition-test1()
   (let
@@ -172,3 +177,29 @@ A
 (let ((list1 '("a" "b"))
       (list2 '("b" "c" "d")))
   (append list1 list2))
+
+
+
+					;(defun get-first-matching-variable (typed-symbol-local scope)
+
+(let ((fields '("field1" "field2")) 
+      (methods '("method1" "method2"))
+      variable
+      scope
+      returned-variable)    
+  (let ((variable (create-variable "var1" fields methods)))
+    (let ((typed-symbol-local "va")
+	  (scope (insert-variable variable scope)))
+      (let ((local-scope scope)
+	    (returned-symbol nil)
+	    current-var
+	    current-symbol)
+	(while local-scope
+	  (setq current-var (car local-scope))
+	  (setq current-symbol (car current-var))
+	  (if (string-prefix-p typed-symbol-local current-symbol t)
+	      (progn
+		(setq returned-symbol current-symbol)
+		(setq local-scope nil)) ; break loop
+	    (setq local-scope (cdr local-scope))))
+	returned-symbol))))
