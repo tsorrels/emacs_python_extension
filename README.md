@@ -11,8 +11,8 @@ $ bash runtests.bash
 ```
 
 To load in Emacs:
-Enable python-mode.  Opening a text file with a '.py' extension does this automatically.
-Load 'py-completion.el'. To load a file, run a command interactively by striking 'M-x'.  Then enter 'load-file'. Then enter the path to 'py-compltion.el'. In total, using an example file path, this looks like: 
+Enable python-mode.  Opening a text file with a ''.py'' extension does this automatically.
+Load ''py-completion.el''. To load a file, run a command interactively by striking ''M-x''.  Then enter ''load-file''. Then enter the path to ''py-compltion.el''. In total, using an example file path, this looks like: 
 
 ```bash
 M-x
@@ -21,12 +21,12 @@ load-file<RET>
 ```
 
 ### Operation
-Emacs will update symbols/variables in scope with every strike of 'RET'. To auto-complete, strike '<backtab>' (mapped to 'shift-tab' by default). Continuously striking '<backtab>' will loop through all variables that the partially completed symbol ended just prior to the cursor matches to.
+Emacs will update symbols/variables in scope with every strike of ''RET''. To auto-complete, strike ''<backtab>'' (mapped to 'shift-tab' by default). Continuously striking ''<backtab>'' will loop through all variables that the partially completed symbol ended just prior to the cursor matches to.
 
 
 ![UI View](/doc/screen_initial.png)
 
-The following screenshots show the change to the current line in the buffer following five stricks of '<backtab>'
+The following screenshots show the change to the current line in the buffer following five stricks of ''<backtab>''
 
 ![UI View](/doc/screen_auto_complete_1.png)
 ![UI View](/doc/screen_auto_complete_2.png)
