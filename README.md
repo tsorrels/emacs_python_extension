@@ -2,10 +2,25 @@
 
 A simple Emacs extension that continuously parses python code and offers basic code completion. IN BETA: currently offers only completion of variables defined in the document. 
 
-To load:
-In Emacs (in python-mode), 
+###Run Instructions
+To run tests:
 
+```bash
+$ bash runtests.bash
 
+```
+
+To load in Emacs:
+Enable python-mode.  Opening a text file with a '.py' extension does this automatically.
+Load 'py-completion.el'. To load a file, run a command interactively by striking 'M-x'.  Then enter 'load-file'. Then enter the path to 'py-compltion.el'. In total, this looks like: 
+
+```bash
+M-x
+load-file<RET>
+~/repos/emacs_python_extension/py-completion.el
+```
+
+###Operation
 Emacs will update symbols/variables in scope with every strike of 'RET'. To auto-complete, strike '<backtab>' (mapped to 'shift-tab' by default). Continuously striking '<backtab>' will loop through all variables that the partially completed symbol ended just prior to the cursor matches to.
 
 
