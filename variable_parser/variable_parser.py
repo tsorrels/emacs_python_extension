@@ -1,6 +1,7 @@
 import keyword
 import string
 from variable import Variable
+from import_parser import ImportParser
 
 delimeters = [
     '.',
@@ -20,11 +21,11 @@ delimeters = [
 class VariableParser(object):
 
     def __init__(self):
-        pass
+        self.import_parser = ImportParser()
 
     def parse_line(self, line):
         index = 0
-        last_char_index = len(line) - 1
+        last_char_index = len(line) #- 1
 
         # check for a comment
         try:
@@ -42,6 +43,12 @@ class VariableParser(object):
             else:
                 break
 
+        #check for import statement
+        words = line.split()
+        if len(words) == 2 and words[0] == 'import':
+            variable = self.import_parser.parse_package(words[1])
+            return variable
+            
         #build symbol
         symbol = ''
         while index < len(line):        
