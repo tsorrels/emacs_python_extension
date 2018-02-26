@@ -62,7 +62,6 @@ class TestVariableParser(unittest.TestCase):
         variable_parser = VariableParser()
         line = "var #="
         variable = variable_parser.parse_line(line)        
-        #print variable.symbol
         self.assertTrue(not variable)
         
     def test_parse_file(self):
@@ -78,3 +77,25 @@ class TestVariableParser(unittest.TestCase):
         self.assertTrue('lock' in variable_symbols)
         self.assertTrue('connection' in variable_symbols)
         self.assertTrue(not 'run_time' in variable_symbols)
+
+    def test_parse_line_import_socket(self):
+        variable_parser = VariableParser()
+        line = "import socket"
+        variable = variable_parser.parse_line(line)        
+        self.assertEqual('socket', variable.symbol)
+        self.assertTrue('SOL_SOCKET' in variable.fields)
+        self.assertTrue('setdefaulttimeout' in variable.methods)
+
+
+    def test_parse_line_import_failed_bad_input(self):
+        variable_parser = VariableParser()
+        line = "import socket 4"
+        variable = variable_parser.parse_line(line)
+        self.assertTrue(not variable)
+
+    def test_parse_line_import_failed_no_such_package(self):
+        variable_parser = VariableParser()
+        line = "import socke"
+        variable = variable_parser.parse_line(line)
+        self.assertTrue(not variable)
+        
