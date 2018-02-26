@@ -23,6 +23,7 @@ def write_output(variables):
 def main():
     variable_parser = VariableParser()
     input = get_stdin()
+    #print input
     variables = variable_parser.parse_input(input)
     write_output(variables)
 

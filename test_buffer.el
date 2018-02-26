@@ -16,7 +16,7 @@
 (global-set-key (kbd "<backtab>") 'newline)
 
 
-
+(message 'last-command)
 
 (ert-deftest addition-test1()
   (let
@@ -203,3 +203,31 @@ A
 		(setq local-scope nil)) ; break loop
 	    (setq local-scope (cdr local-scope))))
 	returned-symbol))))
+
+
+
+
+(split-string "var.func" "\\.")
+
+(split-string "var." "\\.")
+
+(split-string "var" "\\.")
+
+
+(concat "a" "b")
+
+(concat "a" "b" "c")
+
+(string-prefix-p "a" "abc")
+
+(string-prefix-p "" "abc") ;;; this is true
+
+(let ((current-buffer (generate-new-buffer "test-text-buffer")))
+  (set-buffer current-buffer)
+  (insert "variable1-")
+  (setq start-point (re-search-backward "[[:space:]]"  nil t))  
+  (buffer-substring start-point (point-max)))
+
+
+
+;;;  (thing-at-point 'word))

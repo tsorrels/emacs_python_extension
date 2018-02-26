@@ -11,15 +11,19 @@ class ImportParser(object):
     def parse_package(self, package_name):
         methods = []
         members = []
+
+        #print 'importing ' + package_name
         
         try:
             importlib.import_module(package_name)
 
             module = sys.modules[package_name]
-
+            
             for key, value in module.__dict__.iteritems():
                 if key[0] == '_': # if private member, like __copywrite__
-                    pass
+                    continue
+
+                #print key, value
                 
                 # TODO: parse classes
 
@@ -35,7 +39,8 @@ class ImportParser(object):
 
             return variable
                     
-        except:
+        except Exception as E:
+            # print E
             # no retry logic or special error handling
             # TODO: log something
             pass

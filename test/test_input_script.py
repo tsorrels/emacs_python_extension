@@ -1,7 +1,4 @@
-import time
-from ip_monitor.cmd_extension import CmdExtension
-from ip_monitor.display_headers import HeaderItem
-from ip_monitor.ip_extension import Extension
+import socket
 
 def format_time(time):
     returnString = ''
