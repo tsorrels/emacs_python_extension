@@ -118,7 +118,7 @@
         found-field
         found-method)   
     (set-buffer buffer)
-    (insert-file-contents "/home/tsorrels/Documents/repos/emacs_python_extension/test/import_socket_parser_output.txt" nil nil nil)
+    (insert-file-contents (concat default-directory "test/import_socket_parser_output.txt") nil nil nil)
     (setq variables (parse-variables-buffer buffer))
     (setq variable (car variables)) ;there should be only one variable
     (should (string-equal "socket" (get-variable-symbol variable)))
@@ -193,7 +193,7 @@
         sock
 	variables)
     (set-buffer buffer)
-    (insert-file-contents "/home/tsorrels/Documents/repos/emacs_python_extension/test/test_variable_parser_output.txt" nil nil nil)
+    (insert-file-contents (concat default-directory "test/test_variable_parser_output.txt") nil nil nil)
     (setq variables (parse-variables-buffer buffer))   
     (let ((variable (nth 2 variables)))
       (should (string-equal "variable0" (car variable))))
@@ -219,7 +219,7 @@
   (let ((current-buffer (generate-new-buffer "test-text-buffer"))
 	(variables nil))
     (set-buffer current-buffer)
-    (insert-file-contents "/home/tsorrels/Documents/repos/emacs_python_extension/test/test_input_script.py" nil nil nil)
+    (insert-file-contents (concat default-directory "test/test_input_script.py") nil nil nil)
     (run-parser)
     (let ((var1 (get-variable "Threads" global-scope))
 	  (var2 (get-variable "lock" global-scope))
@@ -234,7 +234,7 @@
   (let ((current-buffer (generate-new-buffer "test-text-buffer"))
 	(variables nil))
     (set-buffer current-buffer)
-    (insert-file-contents "/home/tsorrels/Documents/repos/emacs_python_extension/test/test_import_script.py" nil nil nil)
+    (insert-file-contents (concat default-directory "test/test_import_script.py") nil nil nil)
     (run-parser)
     (let ((sock (get-variable "socket" global-scope))
 	  fields
