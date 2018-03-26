@@ -8,6 +8,9 @@ class TestModuleA(object):
         self.test_mobule_b = test_module_b.TestModuleB()
 
 
+    def function_a(self):
+	pass
+
 def test_module_a_function():
     return True
 

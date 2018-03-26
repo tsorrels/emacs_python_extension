@@ -1,3 +1,0 @@
-variable0;;
-variable1;field1;method1
-variable2;field1,field2;method1,method2

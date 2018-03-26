@@ -37,7 +37,7 @@
 	variable1
 	returned-field)    
       (setq variable1 (create-variable "var1" fields1 methods1))
-      (setq returned-field (get-matching-member-and-set-globals variable1
+      (setq returned-field (get-matching-member-and-set-globals-2 variable1
 								"f"
 								nil))
       (should (string-equal "field1"  returned-field))
@@ -52,7 +52,7 @@
 	scope
 	returned-field)    
       (setq variable1 (create-variable "var1" fields1 methods1))
-      (setq returned-field (get-matching-member-and-set-globals variable1
+      (setq returned-field (get-matching-member-and-set-globals-2 variable1
 								"m"
 								nil))
       (should (string-equal "method1"  returned-field))
@@ -67,7 +67,7 @@
 	scope
 	returned-field)    
       (setq variable1 (create-variable "var1" fields1 methods1))
-      (setq returned-field (get-matching-member-and-set-globals variable1
+      (setq returned-field (get-matching-member-and-set-globals-2 variable1
 								"h"
 								nil))
       (should (eq nil returned-field))
@@ -84,7 +84,7 @@
 	variable1
 	returned-field)    
       (setq variable1 (create-variable "var1" fields1 methods1))
-      (setq returned-field (get-matching-member-and-set-globals variable1
+      (setq returned-field (get-matching-member-and-set-globals-2 variable1
 								"f"
 								t))
       (should (eq nil returned-field))
@@ -99,7 +99,7 @@
 	returned-field)    
       (setq variable1 (create-variable "var1" fields1 methods1))
       (setq current-field-global "field1")   
-      (setq returned-field (get-matching-member-and-set-globals variable1
+      (setq returned-field (get-matching-member-and-set-globals-2 variable1
 								"f"
 								t))
       (should (string-equal "field2"  returned-field))
@@ -114,7 +114,7 @@
 	returned-member)    
       (setq variable1 (create-variable "var1" fields1 methods1))
       (setq current-field-global "field2")   
-      (setq returned-member (get-matching-member-and-set-globals variable1
+      (setq returned-member (get-matching-member-and-set-globals-2 variable1
 								"f"
 								t))
       (should (string-equal "f-method2"  returned-member))
@@ -129,7 +129,7 @@
 	returned-member)    
       (setq variable1 (create-variable "var1" fields1 methods1))
       (setq current-field-global "field2")   
-      (setq returned-member (get-matching-member-and-set-globals variable1
+      (setq returned-member (get-matching-member-and-set-globals-2 variable1
 								"f"
 								t))
       (should (string-equal "field1"  returned-member))
@@ -144,7 +144,7 @@
 	returned-field)    
       (setq variable1 (create-variable "var1" fields1 methods1))
       (setq current-method-global "method1")   
-      (setq returned-field (get-matching-member-and-set-globals variable1
+      (setq returned-field (get-matching-member-and-set-globals-2 variable1
 								"m"
 								t))
       (should (string-equal "method2"  returned-field))
@@ -160,7 +160,7 @@
 	returned-member)    
       (setq variable1 (create-variable "var1" fields1 methods1))
       (setq current-method-global "method2")   
-      (setq returned-member (get-matching-member-and-set-globals variable1
+      (setq returned-member (get-matching-member-and-set-globals-2 variable1
 								"m"
 								t))
       (should (string-equal "m-field2"  returned-member))
@@ -175,9 +175,7 @@
 	returned-member)    
       (setq variable1 (create-variable "var1" fields1 methods1))
       (setq current-method-global "method2")   
-      (setq returned-member (get-matching-member-and-set-globals variable1
+      (setq returned-member (get-matching-member-and-set-globals-2 variable1
 								"m"
 								t))
-      (should (string-equal "method1"  returned-member))
-      (should (eq nil  current-field-global))
-      (should (string-equal "method1" current-method-global))))
+      (should (string-equal "method1"  returned-member))))

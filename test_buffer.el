@@ -229,5 +229,11 @@ A
   (buffer-substring start-point (point-max)))
 
 
+(cons 'a' nil)
 
 ;;;  (thing-at-point 'word))
+
+(split-string "a.b.c." "\\.")
+
+(split-string "var" "\\.")
+(split-string "var." "\\.")

@@ -12,13 +12,20 @@ class TestImportParser(unittest.TestCase):
         self.assertTrue('htons' in variable.methods)
         self.assertTrue('IPV6_RTHDR' in variable.fields)
         self.assertFalse('__file__' in variable.fields)
-
+        found_variable = False
+        for variable in variable.variables:
+            if variable.symbol == 'warnings':
+                found_variable = True
+                break
+        self.assertTrue(found_variable)
+        
 
     def test_import_module_test_module(self):
         import_parser = ImportParser()
         variable = import_parser.parse_package('test.test_module')
         self.assertEqual('test.test_module', variable.symbol)
-        self.assertTrue('TestClass' in variable.fields)
+        var = variable.variables[0]
+        self.assertEqual('TestClass', var.symbol)
 
 
 #    def test_import_module_test_package(self):

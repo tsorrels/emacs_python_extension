@@ -78,3 +78,14 @@ THIS FUNCTION LOOPS INFINITELY IF previous-variable IS NOT IN SCOPE."
 	  (if (not (string-equal (car components) ""))
 	      t))
       nil)))
+
+
+(defun get-last-symbol-dep (typed-symbol)
+  (let (symbol-components
+	current-symbol)
+    (setq symbol-components (split-string typed-symbol "\\."))
+    (while symbol-components
+      (setq current-symbol (car symbol-components))
+      (setq symbol-components (cdr symbol-components)))
+    current-symbol))
+

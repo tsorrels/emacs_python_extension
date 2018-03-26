@@ -27,7 +27,7 @@
     (setq scope (insert-variable variable3 scope))
     (setq scope (insert-variable variable2 scope))
     (setq scope (insert-variable variable1 scope))
-    (setq returned-variable (get-first-matching "a" scope comparator))
+    (setq returned-variable (get-first-matching  "a" scope nil comparator))
     (should (string-equal "a-var1" (get-variable-symbol returned-variable)))))
 
 
@@ -37,7 +37,7 @@
 	returned-member
 	comparator)
     (setq comparator 'compare-symbol-with-member)
-    (setq returned-member (get-first-matching "f" fields comparator))
+    (setq returned-member (get-first-matching  "f" fields nil comparator))
     (should (string-equal "field1" returned-member))))
 
 
@@ -47,7 +47,7 @@
 	returned-member
 	comparator)
     (setq comparator 'compare-symbol-with-member)
-    (setq returned-member (get-first-matching "a" fields comparator))
+    (setq returned-member (get-first-matching  "a" nil fields comparator))
     (should (eq nil returned-member))))
 
 
@@ -74,7 +74,7 @@
     (setq scope (insert-variable variable3 scope))
     (setq scope (insert-variable variable2 scope))
     (setq scope (insert-variable variable1 scope))
-    (setq returned-variable (get-next-matching "a"
+    (setq returned-variable (get-next-matching  "a"
 					       scope
 					       (get-variable-symbol variable1)
 					       comparator))
@@ -82,7 +82,7 @@
 
 
 
-(ert-deftest get-next-matching-compare-variables-first-in-list-matches ()
+(ert-deftest get-next-matching_compare-variables_no-subsequent-matches ()
   ""
   (reset-globals)
   (let ((fields1 '("field1" "field2")) 
@@ -104,11 +104,12 @@
     (setq scope (insert-variable variable3 scope))
     (setq scope (insert-variable variable2 scope))
     (setq scope (insert-variable variable1 scope))
-    (setq returned-variable (get-next-matching "a"
+    (setq returned-variable (get-next-matching  "a"
 					       scope
 					       (get-variable-symbol variable2)
 					       comparator))
-    (should (string-equal "a-var1" (get-variable-symbol returned-variable)))))
+    (should (eq nil returned-variable))))
+    ;(should (string-equal "a-var1" (get-variable-symbol returned-variable)))))
 
 
 
@@ -134,7 +135,7 @@
     (setq scope (insert-variable variable1 scope))
     (setq scope (insert-variable variable2 scope))
     (setq scope (insert-variable variable3 scope))
-    (setq returned-variable (get-next-matching "a"
+    (setq returned-variable (get-next-matching  "a"
 					       scope
 					       (get-variable-symbol variable2)
 					       comparator))
@@ -142,7 +143,7 @@
 
 
 
-(ert-deftest get-next-matching-compare-methods-first-in-list-matches ()
+(ert-deftest get-next-matching_compare-methods_no-subsequent-matches ()
   ""
   (reset-globals)
   (let (
@@ -150,11 +151,12 @@
 	returned-variable
 	comparator)
     (setq comparator 'compare-symbol-with-member)
-    (setq returned-variable (get-next-matching "m"
+    (setq returned-variable (get-next-matching  "m"
 					       methods
 					       "method3"
 					       comparator))
-    (should (string-equal "method1"  returned-variable))))
+    (should (eq nil returned-variable))))
+    ;(should (string-equal "method1"  returned-variable))))
 
 
 (ert-deftest get-next-matching-compare-methods-last-in-list-matches ()
@@ -165,7 +167,7 @@
 	returned-variable
 	comparator)
     (setq comparator 'compare-symbol-with-member)
-    (setq returned-variable (get-next-matching "_m"
+    (setq returned-variable (get-next-matching  "_m"
 					       methods
 					       "_method4"
 					       comparator))
