@@ -17,7 +17,7 @@ class ImportParser(object):
             return variable
                     
         except Exception as E:
-            print E
+            # print E
             # no retry logic or special error handling
             # TODO: log something
             pass

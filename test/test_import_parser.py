@@ -22,17 +22,17 @@ class TestImportParser(unittest.TestCase):
 
     def test_import_module_test_module(self):
         import_parser = ImportParser()
-        variable = import_parser.parse_package('test.test_module')
-        self.assertEqual('test.test_module', variable.symbol)
+        variable =import_parser.parse_package('test.test_package.test_module_a')
+        self.assertEqual('test.test_package.test_module_a', variable.symbol)
         var = variable.variables[0]
-        self.assertEqual('TestClass', var.symbol)
+        self.assertEqual('test_module_b_object', var.symbol)
 
 
-#    def test_import_module_test_package(self):
-#        import_parser = ImportParser()
-#        variable = import_parser.parse_package('test')
-#        self.assertEqual('test', variable.symbol)
-#        self.assertTrue('test_module' in variable.fields)
-#        print variable.fields
-#        print 'Finished test_package'
+    def test_import_module_name_not_found(self):
+        import_parser = ImportParser()
+        variable = import_parser.parse_package('thispackagenamedoesnotexist')
+        self.assertEqual(None, variable)
+
+
+
         
