@@ -22,7 +22,59 @@ The third element is a list of strings which are the variable's methods."
   "Getter to return the string that is the symbol for the variable"
   (car variable))
 
-(defun parse-variable (line)
+(defun parse-variable-line (line)
+  (with-temp-buffer
+    (insert line)
+    (goto-char (point-min))
+    (parse-variable)))
+
+(defun parse-variable ()
+  (let (symbol
+	fields-string
+	fields
+	methods-string
+	methods
+	variable
+	variables)
+  
+  ;;; remove beginning '('
+  (forward-char)
+
+  ;;; parse symbol
+  (setq saved-point (point))
+  (search-forward ";")
+  (setq symbol (buffer-substring saved-point (- (point) 1)))
+  
+  ;;; parse fields
+  ;;;(forward-char)
+  (setq saved-point (point))
+  (search-forward ";")
+  (setq fields-string (buffer-substring saved-point (- (point) 1)))
+  (setq fields (parse-basic-members fields-string))
+  
+  ;;; parse methods
+  ;;;(forward-char)
+  (setq saved-point (point))    
+  (search-forward ";")
+  (setq methods-string (buffer-substring saved-point (- (point) 1)))
+  (setq methods (parse-basic-members methods-string))
+  
+  ;;; parse variables
+  ;;;(forward-char)
+  (while (not (= (char-after) ?\)))
+    (cond ((= (char-after) ?,) (forward-char))
+	  ((= (char-after) ?\()
+	   (setq variable  (parse-variable))
+	   (if (eq variables nil)
+	       (setq variables (list variable))		
+	     (setq variables (append variables (list variable)))))))
+
+  ;;; eat ')'
+  (forward-char)
+  (create-variable symbol fields methods variables)))
+
+
+(defun parse-variable-dep (line)
   (let (pruned-string
 	current-char
 	current-string
@@ -65,7 +117,7 @@ The third element is a list of strings which are the variable's methods."
 	      (if (eq variables nil)
 		  (setq variables (list variable))		
 		(setq variables (append variables (list variable))))
-	      (setq pruned-string (car (cdr variables-line-pair))))
+ 	      (setq pruned-string (car (cdr variables-line-pair))))
 	    ( (char-equal current-char (string-to-char ","))
 	      (setq pruned-string (substring pruned-string 1 nil))))
       (setq current-char (string-to-char pruned-string))) ;;; eat ','
