@@ -146,7 +146,7 @@ The third element is a list of strings which are the variable's methods."
   )
   
 
-(defun split-string-at-char (string char)
+(defun split-string-at-char-dep (string char)
   (let (words
 	first-string
 	last-string
