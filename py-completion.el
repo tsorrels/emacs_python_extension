@@ -65,7 +65,6 @@ This method exists to use as a tool in testing."
 
 (defun parse-variables-buffer (buffer)
   (let (variables
-	variable-line-pair
 	variable
 	text
 	lines)
@@ -77,8 +76,7 @@ This method exists to use as a tool in testing."
 	(if (string-equal "" line)
 	    (setq lines (cdr lines)) ;;; pass
 	  
-	  (setq variable-line-pair (parse-variable line))
-	  (setq variable (car variable-line-pair))
+	  (setq variable (parse-variable-line line))
 	  (setq variables (cons variable variables))
 	  (setq lines (cdr lines)))))
     variables))
