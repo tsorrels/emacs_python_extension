@@ -8,12 +8,33 @@ class ImportParser(object):
     def __init__(self):
         self.packages = []
 
-    def parse_package(self, package_name):
-        
+
+    def parse_attribute(self, module_name, member_name):
         try:
-            importlib.import_module(package_name)
-            module = sys.modules[package_name]
-            variable = self.parse_complex_type(package_name, module, [])
+            #full_path = module_name + '.' + member_name
+            importlib.import_module(module_name)
+            module = sys.modules[module_name]
+            attribute = module.__dict__[member_name]
+
+            #symbol_table = globals()
+            #attribute = symbol_table[member_name]
+            #module = sys.modules[module_name]
+            variable = self.parse_complex_type(member_name,
+                                               attribute,
+                                               [])
+            return variable
+                    
+        except Exception as E:
+            # print E
+            # no retry logic or special error handling
+            # TODO: log something
+            pass
+        
+    def parse_module(self, module_name):        
+        try:
+            importlib.import_module(module_name)
+            module = sys.modules[module_name]
+            variable = self.parse_complex_type(module_name, module, [])
             return variable
                     
         except Exception as E:
@@ -27,7 +48,15 @@ class ImportParser(object):
         members = []
         variables = []
 
-        for key, value in obj.__dict__.iteritems():
+        dictionary = None
+        
+        try:
+            dictionary = getattr(obj, '__dict__')
+
+        except AttributeError:            
+            return Variable(symbol, members, methods, variables)
+        
+        for key, value in dictionary.iteritems():
             if key[0] == '_': # if private member, like __copywrite__
                 continue
             

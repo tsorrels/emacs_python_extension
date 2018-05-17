@@ -46,9 +46,14 @@ class VariableParser(object):
         #check for import statement
         words = line.split()
         if len(words) == 2 and words[0] == 'import':
-            variable = self.import_parser.parse_package(words[1])
+            variable = self.import_parser.parse_module(words[1])
             return variable
-            
+
+        elif len(words) == 4 and words[0] == 'from' and words[2] == 'import':
+            variable = self.import_parser.parse_attribute(words[1], words[3])
+            return variable
+
+        
         #build symbol
         symbol = ''
         while index < len(line):        
